@@ -1,0 +1,27 @@
+{
+  "name": "ark_paradigm_challenge",
+  "version": "1.0.0",
+  "description": "This project is a pre-screening test for Ark Paradigm\u001b[A\u001b[F\u001b[Bsition",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbzguy56/ark_paradigm_challenge.git"
+  },
+  "author": "Deepak Birdi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dbzguy56/ark_paradigm_challenge/issues"
+  },
+  "homepage": "https://github.com/dbzguy56/ark_paradigm_challenge#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "typescript-eslint-parser": "^21.0.2"
+  }
+}

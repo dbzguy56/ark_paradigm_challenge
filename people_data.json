@@ -1,0 +1,31 @@
+{
+  "id": 1,
+  "first_name": "Deepak",
+  "last_name": "Birdi",
+  "email": "deepakbirdi25@gmail.com",
+  "favorite_color": "Orange",
+}, {
+  "id": 2,
+  "first_name": "Aang",
+  "last_name": "Kuzon",
+  "email": "aang@avatar.com",
+  "favourite_color": "Orange"
+}, {
+  "id": 3,
+  "first_name": "SpongeBob",
+  "last_name": "SquarePants",
+  "email": "spongebob@kkrab.com",
+  "favorite_color": "Beige"
+}, {
+  "id": 4,
+  "first_name": "Joel",
+  "last_name": "Embiid",
+  "email": "jembiid@nba.com",
+  "favorite_color": "Blue"
+}, {
+  "id": 5,
+  "first_name": "Ru",
+  "last_name": "Bick",
+  "email": "rubick@dota.com",
+  "favorite_color": "Green"
+}
