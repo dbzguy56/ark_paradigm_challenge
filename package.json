@@ -17,11 +17,10 @@
   },
   "homepage": "https://github.com/dbzguy56/ark_paradigm_challenge#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-validator": "^5.3.0",
     "socket.io": "^2.2.0"
-  },
-  "devDependencies": {
-    "eslint": "^5.9.0",
-    "typescript-eslint-parser": "^21.0.2"
   }
 }
