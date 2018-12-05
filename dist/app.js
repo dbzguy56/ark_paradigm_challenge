@@ -22,12 +22,7 @@ app.route('/')
         json_data: content
     });
 })
-    .post([check('first_name').isLength({ min: 1 }).withMessage("First Name is required!"),
-    check('last_name').isLength({ min: 1 }).withMessage("Last Name is required!"),
-    check('email').isLength({ min: 1 }).withMessage("Email is required!"),
-    check('email').isEmail().withMessage("Email has to be in the format of email@example.com"),
-    check('favorite_color').isLength({ min: 1 }).withMessage("Favorite color is required!")
-], (req, res) => {
+    .post(check('json_textarea').isLength({ min: 1 }).withMessage("The json file cannot be empty!"), (req, res) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('index', {
@@ -36,16 +31,26 @@ app.route('/')
         });
     }
     else {
-        let newUser = {
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            favorite_color: req.body.favorite_color,
-        };
-        console.log('User updated!');
-        content = newUser;
-        let data = JSON.stringify(newUser, null, 2);
-        fs.writeFileSync('person_data.json', data);
+        let jsonMsg = "You have entered invalid JSON!";
+        try {
+            let data = JSON.parse(req.body.json_textarea);
+            let dataToSave = JSON.stringify(data, null, 2);
+            fs.writeFileSync('person_data.json', dataToSave);
+            jsonMsg = "Your JSON file has succesfully been updated!";
+            res.render('index', {
+                json_data: content,
+                jsonMsg: jsonMsg
+            });
+        }
+        catch (_a) {
+            res.render('index', {
+                json_data: content,
+                jsonMsg: jsonMsg
+            });
+        }
+        //content = newUser
+        //let data = JSON.stringify(newUser, null, 2)
+        //fs.writeFileSync('person_data.json', data)
     }
 });
 app.post('/find', check('key').isLength({ min: 1 }).withMessage("The key is required!"), (req, res) => {
@@ -62,7 +67,6 @@ app.post('/find', check('key').isLength({ min: 1 }).withMessage("The key is requ
             keyMsg = "The value for the Key: '" + req.body.key + "' is '" + content[req.body.key] + "'";
         }
         res.render('index', {
-            errors: errors.array(),
             json_data: content,
             keyMsg: keyMsg
         });

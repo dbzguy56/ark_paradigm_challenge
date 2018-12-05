@@ -4,7 +4,7 @@
     <title>Ark Paradigm Challenge feed</title>
   </head>
   <body>
-    <% if(errors){ %>
+    <% if (typeof errors !== 'undefined' && errors) {%>
       <ul>
         <% errors.forEach(function(error){ %>
           <li><%= error.msg %></li>
