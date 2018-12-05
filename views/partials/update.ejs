@@ -5,20 +5,20 @@
     <% }) %>
   </ul>
 <% } %>
-<form action="/update" method="POST">
+<form action="/" method="POST">
   <fieldset>
     <legend>Update Info</legend>
     <label>First name:</label><br>
-    <input type="text" name="first_name" placeholder="Enter first name here...">
+    <input type="text" name="first_name" placeholder="Enter first name here..." value="<%= json_data.first_name %>">
     <br><br>
     <label>Last name:</label><br>
-    <input type="text" name="last_name" placeholder="Enter last name here...">
+    <input type="text" name="last_name" placeholder="Enter last name here..." value="<%= json_data.last_name %>">
     <br><br>
     <label>Email:</label><br>
-    <input type="text" name="email" placeholder="Enter email here...">
+    <input type="text" name="email" placeholder="Enter email here..." value="<%= json_data.email %>">
     <br><br>
     <label>Favorite Color:</label><br>
-    <input type="text" name="favorite_color" placeholder="Enter favorite color here...">
+    <input type="text" name="favorite_color" placeholder="Enter favorite color here..." value="<%= json_data.favorite_color %>">
     <br><br>
     <input type="submit" value="Update">
   </fieldset>

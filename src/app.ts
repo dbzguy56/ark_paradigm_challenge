@@ -2,6 +2,9 @@ let app = require('express')()
 let http = require('http').Server(app)
 let path = require('path')
 let bodyParser = require('body-parser')
+let fs = require("fs")
+let content = require('../person_data.json')
+
 const {check, validationResult} = require('express-validator/check')
 
 // View engine
@@ -20,7 +23,9 @@ app.use((req, res, next) => {
 
 app.route('/')
   .get((req, res) => {
-    res.render('index')
+    res.render('index', {
+      json_data: content
+    })
   })
   .post(
     [check('first_name').isLength({ min: 1 }).withMessage("First Name is required!"),
@@ -34,7 +39,8 @@ app.route('/')
 
     if (!errors.isEmpty()) {
       res.render('index', {
-        errors: errors.array()
+        errors: errors.array(),
+        json_data: content
       })
     }
     else {
@@ -44,8 +50,7 @@ app.route('/')
         email: req.body.email,
         favorite_color: req.body.favorite_color,
       }
-      console.log('New user created!')
-      console.log(newUser)
+      console.log('User updated!')
     }
 
 

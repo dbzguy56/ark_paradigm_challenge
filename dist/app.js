@@ -2,6 +2,8 @@ let app = require('express')();
 let http = require('http').Server(app);
 let path = require('path');
 let bodyParser = require('body-parser');
+let fs = require("fs");
+let content = require('../person_data.json');
 const { check, validationResult } = require('express-validator/check');
 // View engine
 app.set('view engine', 'ejs');
@@ -16,7 +18,10 @@ app.use((req, res, next) => {
 });
 app.route('/')
     .get((req, res) => {
-    res.render('index');
+    console.log(content.email);
+    res.render('index', {
+        json_data: content
+    });
 })
     .post([check('first_name').isLength({ min: 1 }).withMessage("First Name is required!"),
     check('last_name').isLength({ min: 1 }).withMessage("Last Name is required!"),
@@ -27,7 +32,8 @@ app.route('/')
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('index', {
-            errors: errors.array()
+            errors: errors.array(),
+            json_data: content
         });
     }
     else {
