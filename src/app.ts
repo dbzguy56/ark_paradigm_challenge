@@ -51,9 +51,10 @@ app.route('/')
         favorite_color: req.body.favorite_color,
       }
       console.log('User updated!')
+      content = newUser
+      let data = JSON.stringify(newUser, null, 2)
+      fs.writeFileSync('person_data.json', data)
     }
-
-
   })
 
 

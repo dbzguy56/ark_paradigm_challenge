@@ -18,7 +18,6 @@ app.use((req, res, next) => {
 });
 app.route('/')
     .get((req, res) => {
-    console.log(content.email);
     res.render('index', {
         json_data: content
     });
@@ -43,8 +42,10 @@ app.route('/')
             email: req.body.email,
             favorite_color: req.body.favorite_color,
         };
-        console.log('New user created!');
-        console.log(newUser);
+        console.log('User updated!');
+        content = newUser;
+        let data = JSON.stringify(newUser, null, 2);
+        fs.writeFileSync('person_data.json', data);
     }
 });
 http.listen(3000, () => {
