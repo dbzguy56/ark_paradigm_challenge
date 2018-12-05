@@ -4,7 +4,15 @@
     <title>Ark Paradigm Challenge feed</title>
   </head>
   <body>
+    <% if(errors){ %>
+      <ul>
+        <% errors.forEach(function(error){ %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
     <% include partials/update %>
+    <% include partials/find_key_value %>
     <ul id="messages"></ul>
   </body>
 </html>

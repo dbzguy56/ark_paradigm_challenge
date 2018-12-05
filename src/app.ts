@@ -57,7 +57,30 @@ app.route('/')
     }
   })
 
+app.post('/find',
+  check('key').isLength({ min: 1 }).withMessage("The key is required!"),
+  (req, res) => {
+    let errors = validationResult(req)
 
+    if (!errors.isEmpty()) {
+      res.render('index', {
+        errors: errors.array(),
+        json_data: content
+      })
+    }
+    else {
+      let keyMsg = "The key could not be found!"
+      if (content.hasOwnProperty(req.body.key)){
+        keyMsg = "The value for the Key: '" + req.body.key + "' is '" + content[req.body.key] + "'"
+      }
+
+      res.render('index', {
+        errors: errors.array(),
+        json_data: content,
+        keyMsg: keyMsg
+      })
+    }
+})
 
 http.listen(3000, () => {
   console.log('Listening on *:3000')
