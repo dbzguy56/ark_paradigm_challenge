@@ -22,13 +22,6 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.route('/update')
-  .get((req, res) => {
-    res.render('update')
-  })
-  .put((req, res) => {
-    //
-  })
 
 app.route('/create')
   .get((req, res) => {
