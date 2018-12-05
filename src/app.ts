@@ -18,14 +18,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.get('/', (req, res) => {
-  res.render('index')
-})
-
-
-app.route('/create')
+app.route('/')
   .get((req, res) => {
-    res.render('create')
+    res.render('index')
   })
   .post(
     [check('first_name').isLength({ min: 1 }).withMessage("First Name is required!"),
@@ -38,7 +33,7 @@ app.route('/create')
     let errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-      res.render('create', {
+      res.render('index', {
         errors: errors.array()
       })
     }

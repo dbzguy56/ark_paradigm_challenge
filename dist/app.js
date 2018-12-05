@@ -14,19 +14,9 @@ app.use((req, res, next) => {
     res.locals.errors = null;
     next();
 });
-app.get('/', (req, res) => {
+app.route('/')
+    .get((req, res) => {
     res.render('index');
-});
-app.route('/update')
-    .get((req, res) => {
-    res.render('update');
-})
-    .put((req, res) => {
-    //
-});
-app.route('/create')
-    .get((req, res) => {
-    res.render('create');
 })
     .post([check('first_name').isLength({ min: 1 }).withMessage("First Name is required!"),
     check('last_name').isLength({ min: 1 }).withMessage("Last Name is required!"),
@@ -36,7 +26,7 @@ app.route('/create')
 ], (req, res) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.render('create', {
+        res.render('index', {
             errors: errors.array()
         });
     }
