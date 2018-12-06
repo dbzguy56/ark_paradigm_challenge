@@ -2,7 +2,7 @@
   <fieldset>
     <legend>Update Info</legend>
     <label>JSON file data:</label><br>
-    <textarea name="json_textarea" placeholder="Enter json data here..." rows="8" cols="80"></textarea>
+    <textarea name="json_textarea" placeholder="Enter json data here..." rows="8" cols="80"><%= JSON.stringify(json_data, null, 2) %></textarea>
     <br><br>
     <input type="submit" value="Update">
     <br><br>

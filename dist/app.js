@@ -11,6 +11,7 @@ app.set('views', path.join(__dirname, '../views'));
 // Body Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(express.static('/public'))
 // Global Variables
 app.use((req, res, next) => {
     res.locals.errors = null;
@@ -37,6 +38,7 @@ app.route('/')
             let dataToSave = JSON.stringify(data, null, 2);
             fs.writeFileSync('person_data.json', dataToSave);
             jsonMsg = "Your JSON file has succesfully been updated!";
+            content = data;
             res.render('index', {
                 json_data: content,
                 jsonMsg: jsonMsg

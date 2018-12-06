@@ -2,17 +2,22 @@
 <html>
   <head>
     <title>Ark Paradigm Challenge feed</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <% if (typeof errors !== 'undefined' && errors) {%>
-      <ul>
-        <% errors.forEach(function(error){ %>
-          <li><%= error.msg %></li>
-        <% }) %>
-      </ul>
-    <% } %>
-    <% include partials/update %>
-    <% include partials/find_key_value %>
-    <ul id="messages"></ul>
+    <div>
+      <% include partials/live_feed %>
+    </div>
+    <div>
+      <% if (typeof errors !== 'undefined' && errors) {%>
+        <ul>
+          <% errors.forEach(function(error){ %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+      <% include partials/update %>
+      <% include partials/find_key_value %>
+    </div>
   </body>
 </html>
