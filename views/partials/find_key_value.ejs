@@ -1,13 +1,12 @@
-<form id="key_form" action="/find" method="POST">
+<form id="key_form">
   <fieldset>
     <legend>Find value for Key</legend>
     <label>Key:</label><br>
-    <input type="text" name="key" placeholder="Enter the key you would like the value for...">
+    <input id="key_input" type="text" placeholder="Enter a key...">
     <br><br>
-    <input type="submit" value="Find value">
+    <button id="key_form_button">Find value for key</button>
     <br><br>
-    <% if (typeof keyMsg !== 'undefined') {%>
-      <%= keyMsg %>
-    <% } %>
+    <div id="key_msg">If you would like to find the value for key,
+      enter the key above.</div>
   </fieldset>
 </form>

@@ -26,11 +26,11 @@
 
       $(() => {
         $('#update_form_button').click(() => {
-          $.ajax({url: "/update", method: "POST",
+          $.ajax({url: '/update', method: 'POST',
             data: $('#json_textarea').val(),
             contentType: 'application/json',
             success: (jsonMsg) => {
-              $('#json_msg').text("Your JSON file has succesfully been updated!")
+              $('#json_msg').text(jsonMsg)
             },
             error: () => {
               $('#json_msg').text("You have entered invalid JSON!")
@@ -44,6 +44,21 @@
         socket.on('update message', (msg) => {
           $('#messages').append($('<li>').text(msg));
         });
+
+        $('#key_form_button').click(() => {
+          let keyData = $('#key_input').val()
+          $.ajax({url: '/find', method: 'GET',
+            data: keyData,
+            contentType: 'text/plain',
+            success: (keyMsg) => {
+              $('#key_msg').text("The value for the Key: '" + keyData + "' is '" + keyMsg + "'")
+            },
+            error: () => {
+              $('#key_msg').text("The key '" + keyData + "' could not be found!")
+            }
+          })
+          return false
+        })
       });
 
     </script>

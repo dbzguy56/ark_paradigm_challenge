@@ -6,20 +6,13 @@ let bodyParser = require('body-parser');
 let fs = require("fs");
 let content = require('../person_data.json');
 let io = require('socket.io')(http);
-const { check, validationResult } = require('express-validator/check');
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
+app.use(express.static('public'));
 // Body Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public'));
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
-// Global Variables
-app.use((req, res, next) => {
-    res.locals.errors = null;
-    next();
-});
 app.get('/', (req, res) => {
     res.render('index', {
         json_data: content
@@ -38,28 +31,17 @@ app.post('/update', (req, res) => {
         status = 200; // OK
     }
     catch (_a) { }
-    res.status(status).json({
-        jsonMsg: jsonMsg
-    });
+    res.status(status).send(jsonMsg);
 });
-app.post('/find', check('key').isLength({ min: 1 }).withMessage("The key is required!"), (req, res) => {
-    let errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.render('index', {
-            errors: errors.array(),
-            json_data: content
-        });
+app.get('/find', (req, res) => {
+    keyData = Object.keys(req.query)[0];
+    let keyMsg = null;
+    let status = 400;
+    if (content.hasOwnProperty(keyData)) {
+        keyMsg = content[keyData];
+        status = 200;
     }
-    else {
-        let keyMsg = "The key '" + req.body.key + "' could not be found!";
-        if (content.hasOwnProperty(req.body.key)) {
-            keyMsg = "The value for the Key: '" + req.body.key + "' is '" + content[req.body.key] + "'";
-        }
-        res.render('index', {
-            json_data: content,
-            keyMsg: keyMsg
-        });
-    }
+    res.status(status).send(keyMsg);
 });
 http.listen(3000, () => {
     console.log('Listening on *:3000');
