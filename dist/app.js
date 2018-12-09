@@ -4,7 +4,7 @@ const http = require("http").Server(app);
 const path = require("path");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-let content = require("../person_data.json");
+let content = { key: "value" };
 const io = require("socket.io")(http);
 // View engine
 app.set("view engine", "ejs");
@@ -14,7 +14,14 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
-    res.render("index", { json_data: content });
+    let status = 400;
+    try {
+        content = require("../person_data.json");
+        JSON.parse(content);
+        status = 200;
+    }
+    catch ( /* tslint:disable:no-empty */_a) { /* tslint:disable:no-empty */ }
+    res.status(status).render("index", { json_data: content });
 });
 app.post("/update", (req, res) => {
     let jsonMsg = "You have entered invalid JSON!";
@@ -28,7 +35,7 @@ app.post("/update", (req, res) => {
         io.emit("update message", dataToSave);
         status = 200; // OK
     }
-    catch (e) { /* tslint:disable:no-empty */ }
+    catch ( /* tslint:disable:no-empty */_a) { /* tslint:disable:no-empty */ }
     res.status(status).send(jsonMsg);
 });
 app.get("/find", (req, res) => {
