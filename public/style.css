@@ -2,6 +2,10 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  height: 600px;
+  overflow: auto;
+  border: 2px solid #1a0e24;
+  border-radius: 15px;
 }
 
 #messages li {
@@ -9,9 +13,47 @@
 }
 
 #messages li:nth-child(odd) {
-  background: #eee;
+  background-color: #1a0e24;
 }
 
-#live_feed {
-  height: 500px;
+#update_form {
+  height: 400px;
+}
+
+#key_form {
+  height: 250px;
+}
+
+#messages, #key_form, #update_form {
+  border: 2px solid #1a0e24;
+  border-radius: 15px;
+}
+
+
+#json_textarea {
+  resize: both;
+  width: 400px;
+  border-radius: 5px;
+}
+
+#key_input {
+  border-radius: 5px;
+}
+
+button {
+  color: white;
+  border-color: #1a0e24;
+  border-radius: 5px;
+  background-color: #1a0e24;
+}
+
+body {
+  background-color: #40213f;
+  border-radius: 25px;
+  color: white;
+  margin: 0 50px;
+}
+
+html {
+  background-color: #1a0e24;
 }

@@ -1,12 +1,9 @@
-<form id="update_form">
-  <fieldset>
-    <legend>Update Info</legend>
-    <label>JSON file data:</label><br>
-    <textarea id="json_textarea" placeholder="Enter json data here..." rows="8" cols="80"><%= JSON.stringify(json_data, null, 2) %></textarea>
-    <br><br>
-    <button id="update_form_button">Update</button>
-    <br><br>
-    <div id="json_msg">If you would like to update the JSON file,
-      enter your data into the text area above.</div>
-  </fieldset>
+<form id="update_form" class="pl-4 pt-2 pb-2 mb-3">
+  <legend>Update Info</legend>
+  <label>JSON file data:</label><br>
+  <textarea id="json_textarea" placeholder="Enter json data here..." rows="8" cols="80"><%= JSON.stringify(json_data, null, 2) %></textarea>
+  <br><br>
+  <button id="update_form_button">Update</button>
+  <br><br>
+  <div id="json_msg"></div>
 </form>
