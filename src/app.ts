@@ -1,63 +1,61 @@
-let express = require('express')
-let app = express()
-let http = require('http').Server(app)
-let path = require('path')
-let bodyParser = require('body-parser')
-let fs = require("fs")
-let content = require('../person_data.json')
-let io = require('socket.io')(http)
+let express = require("express");
+const app = express();
+const http = require("http").Server(app);
+const path = require("path");
+const bodyParser = require("body-parser");
+const fs = require("fs");
+let content = require("../person_data.json");
+const io = require("socket.io")(http);
 
 // View engine
-app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, '../views'))
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "../views"));
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // Body Parser Middleware
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', (req, res) => {
-  res.render('index', {
-    json_data: content
-  })
-})
+app.get("/", (req, res) => {
+  res.render("index", { json_data: content });
+});
 
-app.post('/update',
+app.post("/update",
   (req, res) => {
 
-  let jsonMsg = "You have entered invalid JSON!"
-  let status = 400 // Bad request
+  let jsonMsg = "You have entered invalid JSON!";
+  let status = 400; // Bad request
   try {
-    let data = req.body
-    let dataToSave = JSON.stringify(data, null, 2)
-    fs.writeFileSync('person_data.json', dataToSave)
-    jsonMsg = "Your JSON file has succesfully been updated!"
-    content = data
+    const data = req.body;
+    const dataToSave = JSON.stringify(data, null, 2);
+    fs.writeFileSync("person_data.json", dataToSave);
+    jsonMsg = "Your JSON file has succesfully been updated!";
+    content = data;
 
-    io.emit('update message', dataToSave)
+    io.emit("update message", dataToSave);
 
-    status = 200 // OK
-  }
-  catch {}
+    status = 200; // OK
+  } catch (e) {/* tslint:disable:no-empty */}
 
-  res.status(status).send(jsonMsg)
-})
+  res.status(status).send(jsonMsg);
+});
 
-app.get('/find',
+app.get("/find",
   (req, res) => {
 
-  keyData = Object.keys(req.query)[0]
-  let keyMsg = null
-  let status = 400
-  if (content.hasOwnProperty(keyData)){
-    keyMsg = content[keyData]
-    status = 200
+  const keyData = Object.keys(req.query)[0];
+  let keyMsg = null;
+  let status = 400;
+  if (content.hasOwnProperty(keyData)) {
+    keyMsg = content[keyData];
+    status = 200;
   }
 
-  res.status(status).send(keyMsg)
-})
+  res.status(status).send(keyMsg);
+});
 
 http.listen(3000, () => {
-  console.log('Listening on *:3000')
-})
+  // tslint:disable-next-line:no-console
+  console.log("Listening on *:3000");
+});

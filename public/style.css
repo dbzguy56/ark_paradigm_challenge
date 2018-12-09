@@ -34,10 +34,12 @@
   resize: both;
   width: 400px;
   border-radius: 5px;
+  padding-left: 5px;
 }
 
 #key_input {
   border-radius: 5px;
+  padding-left: 5px;
 }
 
 button {
